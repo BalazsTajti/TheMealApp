@@ -2,6 +2,7 @@ package hu.tajti.themealapp
 
 import android.app.Activity
 import androidx.fragment.app.Fragment
+import androidx.room.RoomDatabase
 
 
 val Activity.injector: TheMealAppApplicationComponent

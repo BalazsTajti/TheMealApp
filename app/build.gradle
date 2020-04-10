@@ -44,6 +44,10 @@ dependencies {
     implementation supportDependencies.cardview
     implementation supportDependencies.design
 
+    implementation roomDependencies.roomRuntime
+    kapt roomDependencies.roomCompiler
+    implementation roomDependencies.roomKtx
+    testImplementation roomDependencies.roomTesting
 
     implementation toolkitDependencies.okhttp
     implementation toolkitDependencies.logging
