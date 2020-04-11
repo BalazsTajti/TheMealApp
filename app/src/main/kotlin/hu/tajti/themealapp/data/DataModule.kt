@@ -16,7 +16,7 @@ class DataModule(private val context: Context) {
 
     @Singleton
     @Provides
-    fun providesProductDao(mealDatabase: MealDatabase): MealDao {
+    fun providesMealDao(mealDatabase: MealDatabase): MealDao {
         return mealDatabase.mealDao()
     }
 }

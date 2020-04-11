@@ -40,11 +40,6 @@ abstract class MealDatabase: RoomDatabase() {
         }
     }
 
-    @VisibleForTesting
-    private fun switchToInMemoryDb(context: Context) {
-        INSTANCE = Room.inMemoryDatabaseBuilder(context.applicationContext, MealDatabase::class.java).build()
-    }
-
     private fun initializeData(injector: TheMealAppApplicationComponent) {
         AsyncTask.execute {
             if (mealDao().countMeals() == 0L) {
