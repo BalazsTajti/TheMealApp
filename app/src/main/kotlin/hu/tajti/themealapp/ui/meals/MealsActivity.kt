@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import hu.tajti.themealapp.R
 import hu.tajti.themealapp.data.MealDao
 import hu.tajti.themealapp.injector
+import hu.tajti.themealapp.model.Meal
 import hu.tajti.themealapp.ui.meal.MealActivity
 import javax.inject.Inject
 
 class MealsActivity : AppCompatActivity(), MealsScreen {
+
+    private val displayedMeals: MutableList<Meal> = mutableListOf()
+    private var mealsAdapter: MealsAdapter? = null
 
     @Inject
     lateinit var mealsPresenter: MealsPresenter
@@ -19,6 +23,7 @@ class MealsActivity : AppCompatActivity(), MealsScreen {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_meals)
+        mealsAdapter = MealsAdapter(applicationContext, displayedMeals)
         injector.inject(this)
     }
 
@@ -32,8 +37,17 @@ class MealsActivity : AppCompatActivity(), MealsScreen {
         mealsPresenter.detachScreen()
     }
 
-    override fun showMeals() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onResume() {
+        super.onResume()
+        mealsPresenter.refreshMeals()
+    }
+
+    override fun showMeals(meals: List<Meal>?) {
+        displayedMeals.clear()
+        if (meals != null) {
+            displayedMeals.addAll(meals)
+        }
+        mealsAdapter?.notifyDataSetChanged()
     }
 
     override fun showMeal(mealId: Long) {

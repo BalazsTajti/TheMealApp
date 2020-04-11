@@ -1,6 +1,8 @@
 package hu.tajti.themealapp.ui.newmeal
 
 import hu.tajti.themealapp.interactor.newmeal.NewMealInteractor
+import hu.tajti.themealapp.interactor.newmeal.event.CreateMealEvent
+import hu.tajti.themealapp.model.Meal
 import hu.tajti.themealapp.ui.Presenter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -21,14 +23,16 @@ class NewMealPresenter @Inject constructor(private val executor: Executor,
         super.detachScreen()
     }
 
-    fun createMeal() {
-        executor.execute {
-            newMealInteractor.createMeal()
+    fun createMeal(meal: Meal?) {
+        if (meal != null) {
+            executor.execute {
+                newMealInteractor.createMeal(meal)
+            }
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onCreateMealEventMainThread(event: Any) {
+    fun onCreateMealEventMainThread(event: CreateMealEvent) {
         screen?.navigateBack()
     }
 

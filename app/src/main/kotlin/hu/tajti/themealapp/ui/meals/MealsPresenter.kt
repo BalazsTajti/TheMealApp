@@ -1,6 +1,7 @@
 package hu.tajti.themealapp.ui.meals
 
 import hu.tajti.themealapp.interactor.meals.MealsInteractor
+import hu.tajti.themealapp.interactor.meals.event.GetMealsEvent
 import hu.tajti.themealapp.ui.Presenter
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -27,8 +28,8 @@ class MealsPresenter @Inject constructor(private val executor: Executor, private
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onGetMealsEventMainThread(event: Any) {
-
+    fun onGetMealsEventMainThread(event: GetMealsEvent) {
+        screen?.showMeals(event.meals)
     }
 
     fun showMeal(mealId: Long) {

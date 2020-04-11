@@ -3,6 +3,7 @@ package hu.tajti.themealapp.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import hu.tajti.themealapp.model.Ingredient
 import hu.tajti.themealapp.model.RandomMealDto
 
 @Entity(tableName = Meal.TABLE_NAME)
@@ -23,9 +24,7 @@ class Meal(
     @ColumnInfo(name = "mealThumbnailUrl")
     var mealThumbnailUrl: String? = null,
     @ColumnInfo(name = "ingredients")
-    var ingredients: String? = null,
-    @ColumnInfo(name = "measures")
-    var measures: String? = null
+    var ingredients: String? = null
 ) {
     companion object {
         const val TABLE_NAME = "meals"
@@ -38,8 +37,32 @@ class Meal(
             meal.instructions = randomMealDto.strInstructions
             meal.mealThumbnailUrl = randomMealDto.strMealThumb
             meal.ingredients = randomMealDto.getIngredientsString()
-            meal.measures = randomMealDto.getMeasuresString()
             return meal
         }
+    }
+
+    fun toMeal(): hu.tajti.themealapp.model.Meal {
+        val meal = hu.tajti.themealapp.model.Meal()
+        meal.area = this.area
+        meal.category = this.category
+        meal.drinkAlternateName = this.drinkAlternateName
+        meal.mealId = this.mealId
+        meal.mealName = this.mealName
+        meal.mealThumbnailUrl = this.mealThumbnailUrl
+        meal.instructions = this.instructions
+        meal.ingredients = this.ingredients?.split(",")?.map {
+            val ingredient = Ingredient()
+            val split = it.split("|")
+            ingredient.ingredientName = split[1].trim()
+            val lastDigitIndex = split[0].indexOfLast { c -> c.isDigit() }
+            if (lastDigitIndex == -1) {
+                ingredient.unit = split[0].trim()
+            } else {
+                ingredient.amount = split[0].substring(0, lastDigitIndex + 1).trim().toInt()
+                ingredient.unit = split[0].substring(lastDigitIndex + 1)
+            }
+            ingredient
+        }?.toMutableList()
+        return meal
     }
 }

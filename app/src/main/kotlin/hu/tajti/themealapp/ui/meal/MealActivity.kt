@@ -3,9 +3,13 @@ package hu.tajti.themealapp.ui.meal
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import hu.tajti.themealapp.injector
+import hu.tajti.themealapp.model.Meal
+import hu.tajti.themealapp.ui.meals.MealsActivity
 import javax.inject.Inject
 
 class MealActivity: AppCompatActivity(), MealScreen {
+    private var meal: Meal? = null
+
     @Inject
     lateinit var mealPresenter: MealPresenter
 
@@ -24,15 +28,20 @@ class MealActivity: AppCompatActivity(), MealScreen {
         mealPresenter.detachScreen()
     }
 
-    override fun showMeal() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onResume() {
+        super.onResume()
+        mealPresenter.loadMeal(intent.getStringExtra(MealsActivity.MEAL_ID)?.toLong())
+    }
+
+    override fun showMeal(meal: Meal?) {
+        this.meal = meal
     }
 
     override fun deleteMeal() {
-        TODO("Not yet implemented")
+        mealPresenter.deleteMeal(meal?.mealId)
     }
 
     override fun navigateBack() {
-        TODO("Not yet implemented")
+        finish()
     }
 }
