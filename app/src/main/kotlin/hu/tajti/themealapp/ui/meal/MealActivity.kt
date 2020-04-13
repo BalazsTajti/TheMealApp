@@ -30,7 +30,7 @@ class MealActivity: AppCompatActivity(), MealScreen {
 
     override fun onResume() {
         super.onResume()
-        mealPresenter.loadMeal(intent.getStringExtra(MealsActivity.MEAL_ID)?.toLong())
+        mealPresenter.loadMeal(intent.getLongExtra(MealsActivity.MEAL_ID, 0L))
     }
 
     override fun showMeal(meal: Meal?) {
@@ -42,6 +42,6 @@ class MealActivity: AppCompatActivity(), MealScreen {
     }
 
     override fun navigateBack() {
-        finish()
+        onBackPressed()
     }
 }

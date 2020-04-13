@@ -58,7 +58,7 @@ class Meal(
             if (lastDigitIndex == -1) {
                 ingredient.unit = split[0].trim()
             } else {
-                ingredient.amount = split[0].substring(0, lastDigitIndex + 1).trim().toInt()
+                ingredient.amount = split[0].substring(0, lastDigitIndex + 1).trim().toDouble()
                 ingredient.unit = split[0].substring(lastDigitIndex + 1)
             }
             ingredient

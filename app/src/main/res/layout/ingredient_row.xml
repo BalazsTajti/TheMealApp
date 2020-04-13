@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rowIngredient"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:baselineAligned="false">
+
+    <EditText
+        android:id="@+id/etIngredientName"
+        android:hint="@string/name"
+        android:layout_weight="0.5"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:inputType="text"
+        android:layout_width="0dp" />
+
+    <EditText
+        android:id="@+id/etIngredientAmount"
+        android:hint="@string/amount"
+        android:layout_weight="0.2"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:inputType="numberDecimal"
+        android:layout_width="0dp" />
+
+    <EditText
+        android:id="@+id/etIngredientUnit"
+        android:hint="@string/unit"
+        android:layout_weight="0.2"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:inputType="text"
+        android:layout_width="0dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addIngredientFab"
+        app:fabCustomSize="30dp"
+        android:layout_gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_add" />
+
+</LinearLayout>

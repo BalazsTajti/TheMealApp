@@ -3,11 +3,16 @@ package hu.tajti.themealapp.ui.meals
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import hu.tajti.themealapp.R
 import hu.tajti.themealapp.data.MealDao
 import hu.tajti.themealapp.injector
 import hu.tajti.themealapp.model.Meal
 import hu.tajti.themealapp.ui.meal.MealActivity
+import hu.tajti.themealapp.ui.newmeal.NewMealActivity
+import hu.tajti.themealapp.ui.utils.hide
+import hu.tajti.themealapp.ui.utils.show
+import kotlinx.android.synthetic.main.activity_meals.*
 import javax.inject.Inject
 
 class MealsActivity : AppCompatActivity(), MealsScreen {
@@ -22,9 +27,23 @@ class MealsActivity : AppCompatActivity(), MealsScreen {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_meals)
-        mealsAdapter = MealsAdapter(applicationContext, displayedMeals)
         injector.inject(this)
+        setContentView(R.layout.activity_meals)
+        mealsAdapter = MealsAdapter(applicationContext, displayedMeals, mealsPresenter)
+        val llm = LinearLayoutManager(applicationContext)
+        llm.orientation = LinearLayoutManager.VERTICAL
+        recyclerViewMeals.layoutManager = llm
+        recyclerViewMeals.adapter = mealsAdapter
+
+        swipeRefreshLayoutMeals.setOnRefreshListener {
+            mealsPresenter.refreshMeals()
+        }
+
+        fab.setOnClickListener {
+            val intent = Intent(this, NewMealActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     override fun onStart() {
@@ -43,11 +62,19 @@ class MealsActivity : AppCompatActivity(), MealsScreen {
     }
 
     override fun showMeals(meals: List<Meal>?) {
+        swipeRefreshLayoutMeals.isRefreshing = false
         displayedMeals.clear()
         if (meals != null) {
             displayedMeals.addAll(meals)
         }
         mealsAdapter?.notifyDataSetChanged()
+        if (displayedMeals.isEmpty()) {
+            recyclerViewMeals.hide()
+            tvEmpty.show()
+        } else {
+            recyclerViewMeals.show()
+            tvEmpty.hide()
+        }
     }
 
     override fun showMeal(mealId: Long) {

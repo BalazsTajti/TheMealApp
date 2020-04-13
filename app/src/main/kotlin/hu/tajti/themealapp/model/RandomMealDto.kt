@@ -128,5 +128,28 @@ data class RandomMealDto(
         "${strMeasure18 ?: ""}|${strIngredient18 ?: ""}".trim(),
         "${strMeasure19 ?: ""}|${strIngredient19 ?: ""}".trim(),
         "${strMeasure20 ?: ""}|${strIngredient20 ?: ""}".trim()
-    ).filter { it.isNotEmpty() }.joinToString(",")
+    ).filter { it.length != 1 }.joinToString(",")
+
+    fun hasValidMeasures(): Boolean {
+        return !(strMeasure1?.contains(Regex("[-/]")) ?: false) && !(strMeasure1?.lastOrNull()?.isDigit() ?: false) && strMeasure1?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure2?.contains(Regex("[-/]")) ?: false) && !(strMeasure2?.lastOrNull()?.isDigit() ?: false) && strMeasure2?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure3?.contains(Regex("[-/]")) ?: false) && !(strMeasure3?.lastOrNull()?.isDigit() ?: false) && strMeasure3?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure4?.contains(Regex("[-/]")) ?: false) && !(strMeasure4?.lastOrNull()?.isDigit() ?: false) && strMeasure4?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure5?.contains(Regex("[-/]")) ?: false) && !(strMeasure5?.lastOrNull()?.isDigit() ?: false) && strMeasure5?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure6?.contains(Regex("[-/]")) ?: false) && !(strMeasure6?.lastOrNull()?.isDigit() ?: false) && strMeasure6?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure7?.contains(Regex("[-/]")) ?: false) && !(strMeasure7?.lastOrNull()?.isDigit() ?: false) && strMeasure7?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure8?.contains(Regex("[-/]")) ?: false) && !(strMeasure8?.lastOrNull()?.isDigit() ?: false) && strMeasure8?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure9?.contains(Regex("[-/]")) ?: false) && !(strMeasure9?.lastOrNull()?.isDigit() ?: false) && strMeasure9?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure10?.contains(Regex("[-/]")) ?: false) && !(strMeasure10?.lastOrNull()?.isDigit() ?: false) && strMeasure10?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure11?.contains(Regex("[-/]")) ?: false) && !(strMeasure11?.lastOrNull()?.isDigit() ?: false) && strMeasure11?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure12?.contains(Regex("[-/]")) ?: false) && !(strMeasure12?.lastOrNull()?.isDigit() ?: false) && strMeasure12?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure13?.contains(Regex("[-/]")) ?: false) && !(strMeasure13?.lastOrNull()?.isDigit() ?: false) && strMeasure13?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure14?.contains(Regex("[-/]")) ?: false) && !(strMeasure14?.lastOrNull()?.isDigit() ?: false) && strMeasure14?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure15?.contains(Regex("[-/]")) ?: false) && !(strMeasure15?.lastOrNull()?.isDigit() ?: false) && strMeasure15?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure16?.contains(Regex("[-/]")) ?: false) && !(strMeasure16?.lastOrNull()?.isDigit() ?: false) && strMeasure16?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure17?.contains(Regex("[-/]")) ?: false) && !(strMeasure17?.lastOrNull()?.isDigit() ?: false) && strMeasure17?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure18?.contains(Regex("[-/]")) ?: false) && !(strMeasure18?.lastOrNull()?.isDigit() ?: false) && strMeasure18?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure19?.contains(Regex("[-/]")) ?: false) && !(strMeasure19?.lastOrNull()?.isDigit() ?: false) && strMeasure19?.getOrNull(0)?.isDigit() ?: true &&
+                !(strMeasure20?.contains(Regex("[-/]")) ?: false) && !(strMeasure20?.lastOrNull()?.isDigit() ?: false) && strMeasure20?.getOrNull(0)?.isDigit() ?: true
+    }
 }

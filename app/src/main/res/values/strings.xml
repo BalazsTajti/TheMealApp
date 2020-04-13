@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">TheMealApp</string>
+    <string name="no_data">No meals found</string>
+    <string name="name">Name</string>
+    <string name="category">Category</string>
+    <string name="area">Area</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="amount">Amount</string>
+    <string name="unit">Unit</string>
+    <string name="create_meal">Create meal</string>
+    <string name="create">Create</string>
 </resources>
