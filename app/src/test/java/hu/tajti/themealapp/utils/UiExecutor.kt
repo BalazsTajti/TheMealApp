@@ -1,4 +1,4 @@
-package hu.tajti.themealapp.mock.utils
+package hu.tajti.themealapp.utils
 
 import android.os.Handler
 import android.os.Looper

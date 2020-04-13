@@ -25,7 +25,7 @@ ext {
     junit_version = "4.12"
     mockito_version = "2.23.4"
     espresso_version = "3.0.2"
-    robolectric_version = "4.1"
+    robolectric_version = "4.3.1"
 
     room_version = "2.2.5"
 
