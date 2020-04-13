@@ -17,7 +17,7 @@ import javax.inject.Inject
 class NewMealActivity : AppCompatActivity(), NewMealScreen {
 
     private var meal: Meal? = null
-    private var ingredientAdapter: IngredientAdapter? = null
+    private var ingredientAdapter: NewMealIngredientAdapter? = null
 
     @Inject
     lateinit var newMealPresenter: NewMealPresenter
@@ -36,8 +36,8 @@ class NewMealActivity : AppCompatActivity(), NewMealScreen {
         val ingredient = Ingredient()
         ingredient.amount = 0.0
         meal?.ingredients?.add(ingredient)
-        ingredientAdapter = IngredientAdapter(this@NewMealActivity, newMealPresenter)
-        IngredientAdapter.ingredients = meal?.ingredients!!
+        ingredientAdapter = NewMealIngredientAdapter(this@NewMealActivity, newMealPresenter)
+        NewMealIngredientAdapter.ingredients = meal?.ingredients!!
         val llm = LinearLayoutManager(this@NewMealActivity)
         llm.orientation = LinearLayoutManager.VERTICAL
         recyclerViewIngredients.layoutManager = llm

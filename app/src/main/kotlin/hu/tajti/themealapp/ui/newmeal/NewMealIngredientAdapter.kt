@@ -2,6 +2,7 @@ package hu.tajti.themealapp.ui.newmeal
 
 import android.content.Context
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
@@ -15,9 +16,9 @@ import hu.tajti.themealapp.ui.utils.invisible
 import kotlinx.android.synthetic.main.ingredient_row.view.*
 
 
-class IngredientAdapter constructor(
+class NewMealIngredientAdapter constructor(
     private val context: Context,
-    private val newMealPresenter: NewMealPresenter): RecyclerView.Adapter<IngredientAdapter.ViewHolder>() {
+    private val newMealPresenter: NewMealPresenter): RecyclerView.Adapter<NewMealIngredientAdapter.ViewHolder>() {
 
     companion object {
         var ingredients: MutableList<Ingredient> = mutableListOf()
@@ -66,6 +67,10 @@ class IngredientAdapter constructor(
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (TextUtils.isEmpty(etIngredientAmount.text)) {
+                        ingredients[adapterPosition].amount = 0.0
+                        return
+                    }
                     ingredients[adapterPosition].amount = etIngredientAmount.text.toString().toDouble()
                 }
             })
