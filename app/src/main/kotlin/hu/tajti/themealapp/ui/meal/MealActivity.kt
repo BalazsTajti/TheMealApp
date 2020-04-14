@@ -7,14 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
 import hu.tajti.themealapp.R
+import hu.tajti.themealapp.TheMealAppApplication
 import hu.tajti.themealapp.injector
 import hu.tajti.themealapp.model.Meal
 import hu.tajti.themealapp.ui.meals.MealsActivity
 import kotlinx.android.synthetic.main.activity_meal.*
+import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class MealActivity: AppCompatActivity(), MealScreen {
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
     private var meal: Meal? = null
     private var ingredientAdapter: MealIngredientAdapter? = null
 
@@ -23,6 +27,7 @@ class MealActivity: AppCompatActivity(), MealScreen {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         injector.inject(this)
         setContentView(R.layout.activity_meal)
 
@@ -85,6 +90,15 @@ class MealActivity: AppCompatActivity(), MealScreen {
         MealIngredientAdapter.ingredients = meal?.ingredients!!
         supportActionBar?.title = meal.mealName
         ingredientAdapter?.notifyDataSetChanged()
+
+
+        Executors.newSingleThreadExecutor().run {
+            val bundle = Bundle()
+            bundle.putString(FirebaseAnalytics.Param.ITEM_ID, meal.mealId.toString())
+            bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, meal.mealName)
+            firebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM, bundle)
+        }
+
     }
 
     override fun deleteMeal() {
