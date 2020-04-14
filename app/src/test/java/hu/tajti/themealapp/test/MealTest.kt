@@ -42,6 +42,7 @@ class MealTest {
         mockMealDatabase.mealDao().insertMeals(Meal())
         val firstMeal = mockMealDatabase.mealDao().getAllMeals().first()
         mealPresenter.deleteMeal(firstMeal.mealId)
+        Thread.sleep(500)
         assert(mockMealDatabase.mealDao().countMeals() == 0L)
     }
 
