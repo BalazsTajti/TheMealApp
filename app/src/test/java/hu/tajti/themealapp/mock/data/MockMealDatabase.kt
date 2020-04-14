@@ -18,7 +18,7 @@ abstract class MockMealDatabase: RoomDatabase() {
         fun getInstance(context: Context): MockMealDatabase {
             if (INSTANCE == null) {
                 INSTANCE = Room.inMemoryDatabaseBuilder(context.applicationContext,
-                    MockMealDatabase::class.java).build()
+                    MockMealDatabase::class.java).allowMainThreadQueries().build()
             }
             return INSTANCE!!
         }

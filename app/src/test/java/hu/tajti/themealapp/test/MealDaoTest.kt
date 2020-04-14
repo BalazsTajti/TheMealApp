@@ -9,11 +9,10 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.android.util.concurrent.BackgroundExecutor
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [29])
+@Config(sdk = [28])
 class MealDaoTest {
 
     lateinit var context: Context
@@ -28,20 +27,18 @@ class MealDaoTest {
 
     @Test
     fun testDao() {
-        BackgroundExecutor.runInBackground {
-            assert(mockMealDatabase.mealDao().countMeals() == 0L)
-            assert(mockMealDatabase.mealDao().getAllMeals().isEmpty())
-            val meal = Meal()
-            meal.mealName = "testMeal"
-            mockMealDatabase.mealDao().insertMeals(meal)
-            assert(mockMealDatabase.mealDao().countMeals() == 1L)
-            val allMeals = mockMealDatabase.mealDao().getAllMeals()
-            assert(allMeals.isNotEmpty())
-            assert(mockMealDatabase.mealDao().getMealById(allMeals.first().mealId!!).mealName == "testMeal")
-            mockMealDatabase.mealDao().deleteMealById(allMeals.first().mealId!!)
-            assert(mockMealDatabase.mealDao().countMeals() == 0L)
-            assert(mockMealDatabase.mealDao().getAllMeals().isEmpty())
-        }
+        assert(mockMealDatabase.mealDao().countMeals() == 0L)
+        assert(mockMealDatabase.mealDao().getAllMeals().isEmpty())
+        val meal = Meal()
+        meal.mealName = "testMeal"
+        mockMealDatabase.mealDao().insertMeals(meal)
+        assert(mockMealDatabase.mealDao().countMeals() == 1L)
+        val allMeals = mockMealDatabase.mealDao().getAllMeals()
+        assert(allMeals.isNotEmpty())
+        assert(mockMealDatabase.mealDao().getMealById(allMeals.first().mealId!!).mealName == "testMeal")
+        mockMealDatabase.mealDao().deleteMealById(allMeals.first().mealId!!)
+        assert(mockMealDatabase.mealDao().countMeals() == 0L)
+        assert(mockMealDatabase.mealDao().getAllMeals().isEmpty())
     }
 
     @After

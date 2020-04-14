@@ -13,12 +13,11 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.android.util.concurrent.BackgroundExecutor
 import org.robolectric.annotation.Config
 import java.util.concurrent.Executors
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [29])
+@Config(sdk = [28])
 class MealTest {
 
     lateinit var mealPresenter: MealPresenter
@@ -40,12 +39,10 @@ class MealTest {
 
     @Test
     fun testDeleteMeal() {
-        BackgroundExecutor.runInBackground {
-            mockMealDatabase.mealDao().insertMeals(Meal())
-            val firstMeal = mockMealDatabase.mealDao().getAllMeals().first()
-            mealPresenter.deleteMeal(firstMeal.mealId)
-            assert(mockMealDatabase.mealDao().countMeals() == 0L)
-        }
+        mockMealDatabase.mealDao().insertMeals(Meal())
+        val firstMeal = mockMealDatabase.mealDao().getAllMeals().first()
+        mealPresenter.deleteMeal(firstMeal.mealId)
+        assert(mockMealDatabase.mealDao().countMeals() == 0L)
     }
 
     @After

@@ -1,7 +1,6 @@
 package hu.tajti.themealapp.test
 
 import android.content.Context
-import androidx.sqlite.db.SupportSQLiteOpenHelper
 import androidx.test.platform.app.InstrumentationRegistry
 import hu.tajti.themealapp.interactor.meals.MealsInteractor
 import hu.tajti.themealapp.mock.data.MockMealDatabase
@@ -14,12 +13,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito.verify
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.android.util.concurrent.BackgroundExecutor
 import org.robolectric.annotation.Config
 import java.util.concurrent.Executors
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [29])
+@Config(sdk = [28])
 class MealsTest {
 
     lateinit var mealsPresenter: MealsPresenter
@@ -36,11 +34,7 @@ class MealsTest {
         val executor = Executors.newSingleThreadExecutor()
         mockMealDatabase = MockMealDatabase.getInstance(context)
         mealsPresenter = MealsPresenter(executor, MealsInteractor(mockMealDatabase.mealDao()))
-        BackgroundExecutor.runInBackground {
-            mockMealDatabase.runInTransaction {
-                mockMealDatabase.mealDao().insertMeals(hu.tajti.themealapp.data.Meal())
-            }
-        }
+        mockMealDatabase.mealDao().insertMeals(hu.tajti.themealapp.data.Meal())
         mealsPresenter.attachScreen(mealsScreen)
     }
 

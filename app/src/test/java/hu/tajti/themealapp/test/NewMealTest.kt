@@ -17,7 +17,7 @@ import org.robolectric.annotation.Config
 import java.util.concurrent.Executors
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [29])
+@Config(sdk = [28])
 class NewMealTest {
 
     lateinit var newMealPresenter: NewMealPresenter
