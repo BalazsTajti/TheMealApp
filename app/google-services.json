@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "830580374168",
+    "firebase_url": "https://themealapp-7289b.firebaseio.com",
+    "project_id": "themealapp-7289b",
+    "storage_bucket": "themealapp-7289b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830580374168:android:7c3e834d40947048162eed",
+        "android_client_info": {
+          "package_name": "hu.tajti.themealapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830580374168-lf8gfgbkuo9non2bied24h8dn4gpdgj6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrPvTidFhWap0J8-u7TW676HxTXDqlGXc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830580374168-lf8gfgbkuo9non2bied24h8dn4gpdgj6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
